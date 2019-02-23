@@ -3,12 +3,14 @@ package com.wanma.data.center;
 import com.wanma.data.center.config.SystemParams;
 import com.wanma.data.center.entity.TblUserAdmin;
 import com.wanma.data.center.service.TblUserAdminService;
+import com.wanma.data.center.utils.RedisUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -26,6 +28,8 @@ public class DataCenterApplicationTests {
     @Autowired
     SystemParams systemParams;
 
+    @Resource
+    RedisUtil redisUtil;
     @Test
     public void testParam(){
         System.out.println("----"+systemParams.getImageUri());
@@ -36,5 +40,12 @@ public class DataCenterApplicationTests {
     public void getList3(){
         List<TblUserAdmin> getList3 = tblUserAdminService.getList3(1,1);
         System.out.println(getList3.toString());
+
+
+        System.out.println("----"+redisUtil.set("age",43));
+        System.out.println("----"+redisUtil.get("age"));
+        System.out.println("----"+redisUtil.set("name","男神"));      //print 男神
+
+        System.out.println("----"+redisUtil.get("name"));      //print 男神
     }
 }
