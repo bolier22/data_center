@@ -2,7 +2,6 @@
 server:
   port: 8123
 
-
 spring:
   application:
     name: spring-boot-redis #配置项目名称
