@@ -6,6 +6,7 @@ spring:
   application:
     name: spring-boot-redis #配置项目名称
 
+
   #配置spring多数据源
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -70,6 +71,14 @@ spring:
         # 连接池中的最小空闲连接
         min-idle: 0
 
+
+  #logback
+  profiles:
+    #指定读取配置文件:dev(开发环境),prod(生产环境),qa(测试环境)
+    active: dev
+
+
+
 #配置mybatis的配置文件加载路径
 mybatis:
   config-location: classpath:mybatis/mybatis-config.xml
@@ -78,8 +87,15 @@ mybatis:
 
 #配置sql-log输出
 logging:
+  config: classpath:logback-${spring.profiles.active}.xml
   level:
     com.wanma.data.center.mapper: DEBUG
+  #开发环境
+  #java -jar app.jar --spring.profiles.active=dev--server.port=8060
+  #测试环境
+  #java -jar app.jar --spring.profiles.active=qa --server.port=8060
+  #生产环境
+  #java -jar app.jar --spring.profiles.active=prod --server.port=8060
 
 
 #自定义系统常量
